@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emporio Beauty Spa | Belleza y bienestar en Sants, Barcelona</title>
+    <meta name="description" content="Emporio Beauty Spa — Tu espacio de belleza y bienestar en Sants, Barcelona. Tratamientos faciales, corporales, depilación y más. Pide cita por WhatsApp.">
+    <meta property="og:title" content="Emporio Beauty Spa — Sants, Barcelona">
+    <meta property="og:description" content="Tu espacio de belleza y bienestar en el corazón de Sants.">
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --brand:      #C48B8B;
+            --brand-dark: #A87070;
+            --accent:     #D4A8A8;
+            --bg:         #FDF9F7;
+            --surface:    #FFFFFF;
+            --surface-2:  #F5EEEB;
+            --muted:      #9A8A85;
+            --text:       #3A2E2E;
+            --line:       rgba(58,46,46,.1);
+            --font-head:  'Cormorant Garamond', serif;
+            --font-body:  'Jost', sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; }
+        h1,h2,h3,h4 { font-family: var(--font-head); font-weight: 400; }
+
+        /* ── NAV ── */
+        #nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            padding: 1.4rem 0; transition: all .3s;
+        }
+        #nav.scrolled {
+            background: rgba(253,249,247,.96); backdrop-filter: blur(8px);
+            padding: .85rem 0; box-shadow: 0 1px 20px rgba(58,46,46,.07);
+        }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .nav-brand { font-family: var(--font-head); font-size: 1.4rem; color: var(--text); letter-spacing: .04em; text-decoration: none; }
+        .nav-brand em { font-style: italic; color: var(--brand); }
+        .nav-links { display: flex; align-items: center; gap: 2.2rem; }
+        .nav-links a { font-size: .75rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--text); text-decoration: none; transition: color .2s; }
+        .nav-links a:hover { color: var(--brand); }
+        .nav-wa {
+            display: flex; align-items: center; gap: .5rem;
+            background: var(--brand); color: #fff;
+            padding: .55rem 1.3rem; border-radius: 2px;
+            font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+            text-decoration: none; transition: background .2s;
+        }
+        .nav-wa:hover { background: var(--brand-dark); }
+        #menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--text); }
+        #mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--surface); box-shadow: 0 8px 24px rgba(0,0,0,.1); padding: 1.5rem; flex-direction: column; align-items: center; gap: 1.2rem; border-top: 1px solid var(--line); }
+        #mobile-menu.open { display: flex; }
+        #mobile-menu a { font-size: .78rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--text); text-decoration: none; padding: .4rem 0; }
+        #mobile-menu .mob-wa { background: var(--brand); color: #fff; padding: .75rem 2.5rem; border-radius: 2px; width: 100%; text-align: center; max-width: 280px; }
+        @media(max-width:768px) { .nav-links { display:none; } #menu-btn { display:block; } }
+
+        /* ── HERO ── */
+        #hero { padding: 7rem 0 4rem; background: var(--bg); }
+        .hero-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .hero-text h1 { font-size: clamp(2.8rem, 5.5vw, 4.5rem); line-height: 1.1; margin-bottom: 1.25rem; }
+        .hero-text h1 em { font-style: italic; color: var(--brand); }
+        .hero-tagline { font-size: 1.05rem; color: var(--muted); line-height: 1.7; margin-bottom: 2rem; max-width: 440px; }
+        .hero-address { display: flex; align-items: flex-start; gap: .6rem; font-size: .85rem; color: var(--muted); margin-bottom: 2rem; }
+        .hero-address svg { flex-shrink: 0; margin-top: 2px; color: var(--brand); }
+        .btn-wa { display: inline-flex; align-items: center; gap: .6rem; background: #25D366; color: #fff; padding: .9rem 2rem; border-radius: 2px; font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; transition: background .2s; }
+        .btn-wa:hover { background: #1ebe5d; }
+        .hero-mosaic { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px; gap: .75rem; }
+        .hero-mosaic img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+        .hero-mosaic .tall { grid-row: span 2; height: 100%; }
+        @media(max-width:900px) { .hero-inner { grid-template-columns: 1fr; } .hero-mosaic { grid-template-rows: 200px 200px; } }
+
+        /* ── KICKER ── */
+        .kicker { font-size: .68rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: var(--brand); display: flex; align-items: center; gap: .75rem; margin-bottom: .75rem; }
+        .kicker::after { content:''; flex: 1; height: 1px; background: var(--brand); opacity: .35; max-width: 60px; }
+
+        /* ── SERVICIOS ── */
+        #servicios { padding: 5.5rem 0; background: var(--surface-2); }
+        .sec-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .sec-header { max-width: 560px; margin-bottom: 3.5rem; }
+        .sec-header h2 { font-size: clamp(2rem, 4vw, 3.2rem); margin-bottom: .75rem; }
+        .sec-header p { font-size: 1rem; color: var(--muted); line-height: 1.7; }
+        .servicios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .servicio-card { background: var(--surface); border-radius: 4px; overflow: hidden; border: 1px solid var(--line); transition: box-shadow .3s, transform .3s; }
+        .servicio-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(196,139,139,.15); }
+        .servicio-img { height: 200px; overflow: hidden; }
+        .servicio-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+        .servicio-card:hover .servicio-img img { transform: scale(1.05); }
+        .servicio-body { padding: 1.5rem; }
+        .servicio-body h3 { font-size: 1.4rem; margin-bottom: .5rem; }
+        .servicio-body p { font-size: .9rem; color: var(--muted); line-height: 1.65; }
+        @media(max-width:900px) { .servicios-grid { grid-template-columns: 1fr 1fr; } }
+        @media(max-width:600px) { .servicios-grid { grid-template-columns: 1fr; } }
+
+        /* ── GALERÍA ── */
+        #galeria { padding: 5.5rem 0; background: var(--bg); }
+        .galeria-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; gap: .75rem; margin-top: 3rem; }
+        .galeria-grid img { width: 100%; height: 100%; object-fit: cover; border-radius: 3px; transition: opacity .3s; }
+        .galeria-grid img:hover { opacity: .88; }
+        .galeria-grid .wide { grid-column: span 2; }
+        @media(max-width:900px) { .galeria-grid { grid-template-columns: repeat(2,1fr); } .galeria-grid .wide { grid-column: span 1; } }
+        @media(max-width:600px) { .galeria-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; } }
+
+        /* ── HORARIOS ── */
+        #horarios { padding: 5.5rem 0; background: var(--surface-2); }
+        .horarios-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+        .horario-table { margin-top: 1rem; }
+        .horario-row { display: flex; justify-content: space-between; align-items: center; padding: .85rem 0; border-bottom: 1px solid var(--line); }
+        .horario-row:last-child { border-bottom: none; }
+        .horario-day { font-weight: 500; font-size: .9rem; }
+        .horario-time { font-size: .9rem; color: var(--muted); }
+        .horario-time.open { color: var(--brand-dark); font-weight: 500; }
+        .horario-time.closed { color: #C0A0A0; }
+        .horarios-cta { background: var(--brand); border-radius: 4px; padding: 2.5rem; color: #fff; }
+        .horarios-cta h3 { font-size: 1.8rem; margin-bottom: .75rem; }
+        .horarios-cta p { font-size: .95rem; opacity: .85; line-height: 1.65; margin-bottom: 1.75rem; }
+        .btn-wa-white { display: inline-flex; align-items: center; gap: .6rem; background: #fff; color: var(--brand-dark); padding: .85rem 1.75rem; border-radius: 2px; font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; transition: background .2s; }
+        .btn-wa-white:hover { background: var(--surface-2); }
+        @media(max-width:768px) { .horarios-inner { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+        /* ── UBICACIÓN ── */
+        #ubicacion { padding: 5.5rem 0; background: var(--bg); }
+        .ubicacion-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; }
+        .ubicacion-info h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 1.5rem; }
+        .info-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+        .info-icon { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--surface-2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--brand); }
+        .info-text h4 { font-family: var(--font-body); font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .25rem; }
+        .info-text p, .info-text a { font-size: .95rem; color: var(--text); text-decoration: none; }
+        .info-text a:hover { color: var(--brand); }
+        .map-wrap { border-radius: 4px; overflow: hidden; box-shadow: 0 8px 30px rgba(58,46,46,.1); }
+        .map-wrap iframe { width: 100%; height: 380px; border: none; display: block; }
+        @media(max-width:900px) { .ubicacion-inner { grid-template-columns: 1fr; } }
+
+        /* ── FOOTER ── */
+        footer { background: var(--text); color: rgba(255,255,255,.65); padding: 3rem 0 2rem; }
+        .foot-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; }
+        .foot-brand { font-family: var(--font-head); font-size: 1.3rem; color: #fff; }
+        .foot-brand em { font-style: italic; color: var(--accent); }
+        .foot-copy { font-size: .78rem; }
+        .foot-linz a { font-size: .72rem; color: rgba(255,255,255,.35); text-decoration: none; }
+        .foot-linz a:hover { color: rgba(255,255,255,.6); }
+
+        /* ── FLOATING WA ── */
+        .float-wa { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 99; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: #25D366; color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 18px rgba(0,0,0,.2); text-decoration: none; transition: transform .2s; }
+        .float-wa:hover { transform: scale(1.1); }
+
+        /* ── REVEAL ── */
+        .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+    <div class="nav-inner">
+        <a href="#" class="nav-brand"><em>Emporio</em> Beauty Spa</a>
+        <div class="nav-links">
+            <a href="#servicios">Servicios</a>
+            <a href="#galeria">Galería</a>
+            <a href="#horarios">Horarios</a>
+            <a href="#ubicacion">Ubicación</a>
+            <a href="https://wa.me/34635267202?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20cita%20en%20Emporio%20Beauty%20Spa" target="_blank" rel="noopener" class="nav-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Pedir cita
+            </a>
+        </div>
+        <button id="menu-btn" aria-label="Menú">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+    </div>
+    <div id="mobile-menu">
+        <a href="#servicios" onclick="closeMob()">Servicios</a>
+        <a href="#galeria" onclick="closeMob()">Galería</a>
+        <a href="#horarios" onclick="closeMob()">Horarios</a>
+        <a href="#ubicacion" onclick="closeMob()">Ubicación</a>
+        <a href="https://wa.me/34635267202?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20cita%20en%20Emporio%20Beauty%20Spa" target="_blank" rel="noopener" class="mob-wa">Pedir cita</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-inner">
+        <div class="hero-text reveal">
+            <div class="kicker">Beauty · Wellness · Spa</div>
+            <h1>Tu espacio de <em>belleza</em> y bienestar</h1>
+            <p class="hero-tagline">Tratamientos exclusivos para cuidar tu cuerpo y tu mente. Porque mereces un momento solo para ti.</p>
+            <div class="hero-address">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Rambla de Badal, 58 · Sants-Montjuïc, 08014 Barcelona</span>
+            </div>
+            <a href="https://wa.me/34635267202?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20cita%20en%20Emporio%20Beauty%20Spa" target="_blank" rel="noopener" class="btn-wa">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Pedir cita por WhatsApp
+            </a>
+        </div>
+        <div class="hero-mosaic reveal">
+            <img src="foto2.png" alt="Emporio Beauty Spa" class="tall">
+            <img src="foto3.png" alt="Tratamiento facial">
+            <img src="foto4.png" alt="Tratamiento corporal">
+        </div>
+    </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+    <div class="sec-inner">
+        <div class="sec-header reveal">
+            <div class="kicker">Nuestros tratamientos</div>
+            <h2>Todo lo que necesitas en un solo lugar</h2>
+            <p>Ofrecemos una amplia gama de tratamientos de belleza y bienestar, personalizados para cada cliente.</p>
+        </div>
+        <div class="servicios-grid">
+            <div class="servicio-card reveal">
+                <div class="servicio-img"><img src="foto5.png" alt="Tratamientos faciales"></div>
+                <div class="servicio-body">
+                    <h3>Tratamientos faciales</h3>
+                    <p>Limpiezas, hidratación profunda, antiedad y más. Resultados visibles desde la primera sesión.</p>
+                </div>
+            </div>
+            <div class="servicio-card reveal">
+                <div class="servicio-img"><img src="foto6.png" alt="Tratamientos corporales"></div>
+                <div class="servicio-body">
+                    <h3>Tratamientos corporales</h3>
+                    <p>Masajes relajantes, reductores, drenajes linfáticos y tratamientos anticelulíticos.</p>
+                </div>
+            </div>
+            <div class="servicio-card reveal">
+                <div class="servicio-img"><img src="foto7.png" alt="Belleza y estética"></div>
+                <div class="servicio-body">
+                    <h3>Belleza y estética</h3>
+                    <p>Depilación, manicura, pedicura, tinte de cejas y pestañas. Tu look completo en un solo espacio.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+    <div class="sec-inner">
+        <div class="sec-header reveal">
+            <div class="kicker">Nuestro espacio</div>
+            <h2>Entra y siéntete en casa</h2>
+        </div>
+        <div class="galeria-grid">
+            <img src="interior1.png" alt="Interior Emporio Beauty Spa" class="wide reveal">
+            <img src="foto8.png" alt="Sala de tratamiento" class="reveal">
+            <img src="foto9.png" alt="Ambiente spa" class="reveal">
+            <img src="foto10.png" alt="Tratamiento" class="reveal">
+            <img src="foto11.png" alt="Detalles spa" class="reveal">
+        </div>
+    </div>
+</section>
+
+<!-- HORARIOS -->
+<section id="horarios">
+    <div class="sec-inner">
+        <div class="horarios-inner">
+            <div class="reveal">
+                <div class="kicker">Cuándo visitarnos</div>
+                <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:.5rem">Horario</h2>
+                <div class="horario-table">
+                    <div class="horario-row"><span class="horario-day">Lunes</span><span class="horario-time open">10:00 – 20:00</span></div>
+                    <div class="horario-row"><span class="horario-day">Martes</span><span class="horario-time open">10:00 – 20:00</span></div>
+                    <div class="horario-row"><span class="horario-day">Miércoles</span><span class="horario-time open">10:00 – 20:00</span></div>
+                    <div class="horario-row"><span class="horario-day">Jueves</span><span class="horario-time open">10:00 – 20:00</span></div>
+                    <div class="horario-row"><span class="horario-day">Viernes</span><span class="horario-time open">10:00 – 20:00</span></div>
+                    <div class="horario-row"><span class="horario-day">Sábado</span><span class="horario-time open">10:00 – 14:00</span></div>
+                    <div class="horario-row"><span class="horario-day">Domingo</span><span class="horario-time closed">Cerrado</span></div>
+                </div>
+            </div>
+            <div class="horarios-cta reveal">
+                <h3>¿Lista para tu momento?</h3>
+                <p>Reserva tu cita por WhatsApp y te confirmamos disponibilidad al momento. Sin esperas, sin complicaciones.</p>
+                <a href="https://wa.me/34635267202?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20cita%20en%20Emporio%20Beauty%20Spa" target="_blank" rel="noopener" class="btn-wa-white">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    635 26 72 02
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- UBICACIÓN -->
+<section id="ubicacion">
+    <div class="ubicacion-inner">
+        <div class="ubicacion-info reveal">
+            <div class="kicker">Dónde estamos</div>
+            <h2>Encuéntranos en Sants</h2>
+            <div class="info-item">
+                <div class="info-icon">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div class="info-text">
+                    <h4>Dirección</h4>
+                    <p>Rambla de Badal, 58<br>Sants-Montjuïc, 08014 Barcelona</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </div>
+                <div class="info-text">
+                    <h4>WhatsApp</h4>
+                    <a href="https://wa.me/34635267202?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20cita%20en%20Emporio%20Beauty%20Spa">635 26 72 02</a>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="info-text">
+                    <h4>Horario</h4>
+                    <p>Lun–Vie: 10:00 – 20:00<br>Sábado: 10:00 – 14:00<br>Domingo: Cerrado</p>
+                </div>
+            </div>
+        </div>
+        <div class="map-wrap reveal">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993!2d2.1337615!3d41.3681756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49914f13bae15%3A0x8ef0710c4cd96be5!2sEmporio%20Beauty%20spa!5e0!3m2!1ses!2ses!4v1718100000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Emporio Beauty Spa en Google Maps"></iframe>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="foot-inner">
+        <div class="foot-brand"><em>Emporio</em> Beauty Spa</div>
+        <div class="foot-copy">Rambla de Badal, 58 · Sants, Barcelona</div>
+        <div class="foot-linz"><a href="https://linzpe.github.io/web-portfolio/">Web by Linz · Estudio Web</a></div>
+    </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/34635267202?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20cita%20en%20Emporio%20Beauty%20Spa" target="_blank" rel="noopener" class="float-wa" aria-label="WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), {passive:true});
+
+const menuBtn = document.getElementById('menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+function closeMob() { mobileMenu.classList.remove('open'); }
+
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, {threshold: 0.1});
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
